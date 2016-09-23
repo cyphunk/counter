@@ -1,0 +1,22 @@
+Bill of Materials
+
+designs a mix between http://www.instructables.com/id/Giant-Two-Digit-Countdown-Clock/
+and https://www.sparkfun.com/tutorials/47
+
+For LED digits:
+21 x 2N3904 NPN transistor (alt: 2N2222A)
+21 x 1k ohm resistors
+ 1 x 5M LED strip: 300 leds 3528 12V KOUD WIT 5M 18watt total 1.5Amp total
+     Vellemann LB12M130CWN
+     http://www.rotor.eu/en/indexzoek.php?zoekart=115220
+     http://www.velleman.eu/products/view/?id=430406
+ 1 x 22uf capacitor
+
+For 12V to 5V for raspberry pi usb power rail:
+1 x LM7805 12v to 5V
+    head sync and bolt
+    its very hot thought. perhaps look for cooler alternative next time
+1 x 12v 1.2amp DC power supply
+
+For buttons:
+2 x push buttons
