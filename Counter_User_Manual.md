@@ -9,23 +9,9 @@ To ***use*** there are two buttons, go/pause and reset, on the control board.
 To ***configure*** find the wifi network and wireless control web interface. This is only needed if the starting number (0 by default) and number counted up to (630 by default) need to be changed.
 
 For ***handling*** this document describes some things to be careful about when packing up.
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
 # Setup
 ![](images/DSC07190_mod_sm.JPG)
 
@@ -47,23 +33,32 @@ board in one orientation, as shown in the pictures below. Notice that on the cab
 <br />
 <br />
 
-### Connect power
+### Connect DC power
 
-The board is powered with a standard 12V 1.5amp power cable. The supplied cable
+The board is powered with a standard 12V 1.5amp power cable. The supplied DC cable
 is sufficient but if in the future the cable must be replaced (if it were lost)
 the inner pole of the cable is the 12V+ and the outer is ground.
+
+### Connect Battery power
+Alternatively you can also use a 12V battery. The supplied lead acid 12V 2000mAh battery provides full power with all LED's on for 45 minutes or more. 
+
+To recharge the battery use a lead acid battery charger such as the one supplied with the battery. Connect it to the charger in the manner shown below with the "+" cable connector of the battery attached to the red charger clamp and the "-" cable connector to the black clamp.
+
 <br />
+![](images/DSC07207_mod.JPG)
 <br />
-<br />
+
+<br /><br /><br /><br /><br />
+
 # Use
 When the device is powered on it will first do the Test Display Sequence. After this the display will be blank and ready for counting up. The buttons can be used to start counting, pause or reset the counter.
 
 <br />
 ![](images/DSC07195_mod_sm_buttons.JPG)
 <br />
-<br />
-<br />
-<br />
+
+<br /><br /><br /><br /><br />
+
 # Configure
 
 The wireless control panel can be used to configure the settings of the device. To access this interface use a computer or phone and join the Wifi network called "**192.168.6.1**"
@@ -77,9 +72,8 @@ The interface provides buttons that control the counter a similar way to the phy
 * **Start Count** - this is the number the counter will show before counting. If it is set to "0" that would mean that after reset the counter would first be blank, then after pressing the Go button it will show "0" and then wait. And then after pressing the Go button again it will start counting from 1.
 * **Stop count** - this is what the counter counts up to.
 * **When finished show** - this number or 3 character text (such as "FIN") will be shown on the display for a number of seconds also configured in the "**leave up for**" input box. After this time has elapsed the display will go to blank, showing nothing.
-<br />
-<br />
 
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 # Test Display Sequence
 
@@ -91,13 +85,11 @@ This sequence is used to confirm the display is physically setup and connected i
 2. Turn on all segments (number "888") to confirm all segments are working.  
    ![](images/DSC07181_mod.JPG)
 3. Show a rectangle. The left most segment should show "[" and the right most should show "]". This helps determine orientation of digits.  
-   ![](images/DSC07160_mod.JPG)<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+   ![](images/DSC07160_mod.JPG)
 4. Show "123". This also helps determine orientation.  
    ![](images/DSC07185_mod.JPG)
 
-<br />
-<br />
-<br />
+<br /><br /><br /><br /><br /><br /><br /><br />
 
 # Handling
 

@@ -16,10 +16,28 @@ For LED digits:
 For 12V to 5V for raspberry pi usb power rail:
  1 x LM7805 12v to 5V (quiet hot. perhaps find alternative)
      head sync and bolt
- 1 x 12v 1.2amp DC power supply
 
 For buttons:
  2 x push buttons
 
+MCU
  1 x Raspberry Pi
  1 x Edimax Wifi dongle (if you want the wireless configure option)
+
+ 1 x 12v 1.2amp DC power supply
+   or
+ 1 x 12v battery. We used YUASA 12v 2000mAh (2amp for one hour)
+     https://www.amazon.de/gp/product/B009D0KCW4/
+     http://www.yuasabatteries.com/pdfs/NP_2_12_DataSheet.pdf
+     will also need a charger for 12v lead acid batteries
+     https://www.amazon.de/battery-charger-lead-acid-batteries/dp/B00CVNIOS4/
+     or https://www.amazon.de/Plug--500mA-lead-battery-charger/dp/B000NVST72/
+     We used a HQ BAT-LEAD-C10HQ with 13.8v 600mA charging current.
+     We also purchased two clamps that fit the connectors of the battery and DC
+     female lead to create a cable that would fit and connect to the controller
+     board
+     
+     In testing this battery lasted for several hours with all LED segments
+     on ("888") and the WiFi dongle broadcasting though not in heavy use.
+     Alternatively one could use 8 standard C cell alkaline batteries in series.
+     http://www.instructables.com/id/How-to-Wire-Batteries-in-Series-or-in-Parallel/
