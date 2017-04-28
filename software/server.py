@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
 import web
 from web.wsgiserver import CherryPyWSGIServer
@@ -8,7 +8,7 @@ import time
 
 DEBUG=True
 
-DIR='/home/pi'
+DIR=os.path.realpath(os.path.dirname(__file__))
 COUNTSETTINGSFILE=DIR+'/countinit.sh'
 STATEFILE=DIR+'/state.txt'
 
@@ -23,7 +23,7 @@ urls = (
 def debug(message):
     if not DEBUG:
         return
-    print message
+    print(message)
 
 def readcountsettings():
     f = open(COUNTSETTINGSFILE, 'r')
@@ -111,28 +111,34 @@ class index:
         <br><br>
         <b>Settings:</b><br><br>
         <form method=post>
-        &nbsp;&nbsp;&nbsp;&nbsp;Start count at <input type=text size=3 name=countstart value="%s"> seconds<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;Stop count at <input type=text size=3 name=countuntil value="%s"> seconds<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Start count at <input type=text size=3 name=countstart value="%s"><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Stop count at <input type=text size=3 name=countuntil value="%s"><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Seconds between increment <input type=text size=3 name=secondsbetweentick value="%s"><br>
         &nbsp;&nbsp;&nbsp;&nbsp;When finished show <input type=text size=3 maxlength=3 name=endwith value='%s'> and leave up for <input type=text size=3 name=endseconds value="%s"> seconds<br>
         <br>&nbsp;&nbsp;&nbsp;&nbsp;<input type=submit value="click here to CHANGE settings"><br>
         &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 0.7em; opacity: 0.8;">(This will also RESET the counter)</span><br>
         </form>
         </body></html>
-        """%(settings['COUNTSTART'], settings['COUNTUNTIL'], settings['ENDWITH'], settings['ENDSECONDS'])
+        """%(settings['COUNTSTART'], settings['COUNTUNTIL'], settings['SECONDSBETWEENTICK'], settings['ENDWITH'], settings['ENDSECONDS'])
     def POST(self):
         x = web.input()
         # sanity check
         # if 'countstart' not in x or 'countuntil' not in x or 'endwidth' not in x:
         #     return web.internalerror("missing form values.")
-        # def is_digit(s):
-        #     return s.isdigit() or (s[0] == '-' and s[1:].isdigit())
         # if not is_digit(x.countstart) or not is_digit(x.countuntil):
         #     return web.internalerror("count start and count until must be numbers")
         # force x.endwith to be string of 3 chars with spaces at LEAST
+
+        # Force seconds between tick to be a non-float intiger number from 1+
+        def is_digit(s):
+            return s.isdigit() or (s[0] == '-' and s[1:].isdigit())
+        if not is_digit(x.secondsbetweentick) or int(x.secondsbetweentick) < 1:
+            return "seconds between tick must be 1+"
+
         x.endwith = "%3s"%x.endwith
         f = open(COUNTSETTINGSFILE, 'w')
-        f.write("""COUNTSTART=%s\nCOUNTUNTIL=%s\nENDWITH="%s"\nENDSECONDS=%s
-        """%(x.countstart, x.countuntil, x.endwith, x.endseconds))
+        f.write("""COUNTSTART=%s\nCOUNTUNTIL=%s\nSECONDSBETWEENTICK=%s\nENDWITH="%s"\nENDSECONDS=%s
+        """%(x.countstart, x.countuntil, x.secondsbetweentick, x.endwith, x.endseconds))
         time.sleep(1)
         doreset()
         raise web.seeother('/')
@@ -140,4 +146,8 @@ class index:
 app = myApp(urls, globals())
 
 if __name__ == '__main__':
-    app.run()
+    # For debug mode run without requiring root. Meaning run on port 8088
+    if 'DEBUG' in os.environ and os.environ['DEBUG'] == '1':
+        app.run(port=8080)
+    else:
+        app.run(port=80)

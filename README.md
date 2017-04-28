@@ -22,6 +22,25 @@ RaspberryPi only requires the WiringPi library for basic functions (heavy use of
 
 After dependencies are installed you copy the software and start everything with the ``run.sh`` script. Add this to ``/etc/rc.local`` if you want the software to start on boot.
 
+Testing
+-------
+To test locally (on a Linux, Unix or OSX workstation)
+
+Setup:
+
+    pip install webpy
+
+Run:    
+
+    export DEBUG=1
+    bash software/countup.sh
+
+Optionally in another terminal you can run the control web server to modify configuration:
+
+    export DEBUG=1
+    python2 software/server.py
+    # open http://localhost:8080
+
 
 License
 -------

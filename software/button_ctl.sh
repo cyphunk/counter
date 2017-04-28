@@ -5,12 +5,14 @@
 # so we changed the schematic with gnd on button input, and a rpi internal pullup
 # on gpio which is connected to button output directly
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 EDGE=3
 INNER=2
 PAUSE=$EDGE
 RESET=$INNER
 
-STATEFILE="/home/pi/state.txt"
+STATEFILE="$DIR/state.txt"
 CURRENTSTATE=$(cat $STATEFILE)
 
 button() {

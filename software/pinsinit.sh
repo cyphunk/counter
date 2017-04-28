@@ -28,6 +28,12 @@ export SEG3E=22
 export SEG3F=24
 export SEG3G=10
 
+if [ "$DEBUG" == "1" ]; then
+    # when in debug mode ignore gpio commands
+    function gpio () {
+        return
+    }
+fi
 gpio -g mode $SEG1A out
 gpio -g mode $SEG1B out
 gpio -g mode $SEG1C out

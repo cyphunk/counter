@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-. /home/pi/pinsinit.sh
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+. $DIR/pinsinit.sh
 # following values defined in countinit now
 # COUNTSTART=1
 # COUNTUNTIL=660
 # ENDWITH="FIN"
-. /home/pi/countinit.sh
+. $DIR/countinit.sh
 
 # COUNTSTART=108
 # COUNTUNTIL=110
@@ -13,27 +14,35 @@
 # defaults:
 COUNTSTART="${COUNTSTART:-1}"
 COUNTUNTIL="${COUNTUNTIL:-630}"
+SECONDSBETWEENTICK="${SECONDSBETWEENTICK:-1}"
 ENDWITH="${ENDWITH:-}"
 ENDSECONDS="${ENDSECONDS:-3}"
 
-STATEFILE="/home/pi/state.txt"
+STATEFILE="$DIR/state.txt"
 # touch $STATEFILE
 # ALWAYS START WITH PAUSE
 
 while [ 1 ]; do
     echo "starting from BLANK"
     print3patterns $(string2patterns "   ")
-    echo "BLANK" > $STATEFILE
+    if [ "$DEBUG" != "1" ]; then
+        echo "BLANK" > $STATEFILE
+    else
+        echo "GO" > $STATEFILE
+    fi
     # Wait for user to go past blank
     while [ "$(cat $STATEFILE)" != "GO" ]; do
         sleep 0.01
     done
 
     # SETUP INITIAL STATE
-    . /home/pi/countinit.sh
+    . "$DIR/countinit.sh"
     i=$COUNTSTART
-    echo "PAUSE" > $STATEFILE
-    # echo "GO" > $STATEFILE
+    if [ "$DEBUG" != "1" ]; then
+        echo "PAUSE" > $STATEFILE
+    else
+        echo "GO" > $STATEFILE
+    fi
     next3segpatterns=$(string2patterns "$(printf '%3d' $i)")
     starttick=$(date +%s)
     lasttick=$starttick
@@ -42,11 +51,14 @@ while [ 1 ]; do
     while [ $i -le $COUNTUNTIL ]; do
         # wait for a second to pass
         # ineffect this also waits for start of first second before first print
-        while [ "$(date +%s)" == "$lasttick" ]; do
+        while [ "$(($(date +%s)-($SECONDSBETWEENTICK-1)))" -le "$lasttick" ]; do
             sleep 0.01
         done
         # show pre-prepared patters
         print3patterns $next3segpatterns
+        if [ "$DEBUG" == "1" ]; then
+            echo "tick: $i"
+        fi
         # prepare next patterns before wait
         lasttick=$(date +%s)
         i=$(($i+1))
