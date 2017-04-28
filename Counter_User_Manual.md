@@ -65,7 +65,7 @@ The wireless control panel can be used to configure the settings of the device. 
 with the password "**upandover**". It may take up to 60 seconds from when the
 power is connected to the control board for this network to appear. Once connected to the wireless network access the control interface at http://192.168.6.1 using a web browser.
 
-![](images/Screen Shot 76.png)
+![](images/Screen Shot 76.jpg)
 
 The interface provides buttons that control the counter a similar way to the physical control buttons. However, from this interface you can also configure the counter settings.
 
